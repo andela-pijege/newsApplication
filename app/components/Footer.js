@@ -1,13 +1,13 @@
-var React = require('react');
+import React from 'react';
 
 class Footer extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>My Footer page</h1>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <h1>My Footer page</h1>
+      </div>
+    );
+  }
 }
 
 module.exports = Footer;

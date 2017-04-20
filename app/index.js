@@ -1,17 +1,17 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var {Route, Router, IndexRoute, hashHistory} = require ('react-router');
-var Main = require('./components/Main');
-var News = require('./components/News');
-var Search = require('./components/Search');
-var Favorites = require('./components/Favorites');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Route, Router, IndexRoute, hashHistory } from 'react-router';
+import Main from './components/Main';
+import News from './components/News';
+import Search from './components/Search';
+import Favorites from './components/Favorites';
 
 ReactDOM.render(
-    <Router history={hashHistory}>
-        <Route path="/" component={Main}>
-            <Route path="search" component={Search}/>
-            <Route path="favorites" component={Favorites}/>
-            <IndexRoute component={News}/>
-        </Route>
-    </Router>,
- document.getElementById('app'));
+  <Router history={hashHistory}>
+    <Route path="/" component={Main}>
+      <Route path="search" component={Search} />
+      <Route path="favorites" component={Favorites} />
+      <IndexRoute component={News} />
+    </Route>
+  </Router>,
+document.getElementById('app'));

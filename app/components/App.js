@@ -1,13 +1,13 @@
-var React = require('react');
+import React from 'react';
 
 class App extends React.Component {
-    render() {
-        return (
-            <div>
-                <h1>this is the app js!!!</h1>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <h1>this is the app js!!!</h1>
+      </div>
+    );
+  }
 }
 
 module.exports = App;
