@@ -1,33 +1,31 @@
 import React from 'react';
-import SearchForm from './SearchForm';
-import api from '../api/NewsApi';
+import newsAction from '../actions/NewsActions';
+import newsStore from '../stores/newsStore';
 
 
 class News extends React.Component {
   constructor(props) {
     super(props);
+    const news = newsStore.getNews();
     this.state = {
-      newslist: [],
+      newslist: news,
     };
+    this.onChangeNews = this.onChangeNews.bind(this);
   }
   componentWillMount() {
-    api.getSources().then((data) => {
-      this.setState({
-        newslist: data,
-      });
-    },
-    );
+    newsAction.getNews();
+    newsStore.addChangeListener(this.onChangeNews);
   }
+  onChangeNews() {
+    const news = newsStore.getNews();
+    this.setState({ newslist: news.news });
+  }
+
   render() {
     return (
       <div>
         <h1>News Page!!!</h1>
-        <SearchForm />
-        <ul>
-          {this.state.newslist.map((news) => {
-            return <li key={news.id}>{news.name}</li>;
-          })}
-        </ul>
+        <div>{this.state.newslist}</div>
       </div>
     );
   }

@@ -1,16 +1,27 @@
-const React = require('react');
-const { Link } = require('react-router');
+import React, { Component } from 'react';
+import { Link } from 'react-router';
 
-class Nav extends React.Component {
+class Nav extends Component {
+  constructor() {
+    super();
+    this.state = {};
+  }
+
   render() {
     return (
-      <div>
-        <Link to="/">News</Link>
-        <Link to="/search">Search</Link>
-        <Link to="/favorites">Favorites</Link>
-      </div>
+      <nav className="navbar navbar-inverse">
+        <div className="container-fluid">
+          <div className="navbar-header">
+            <a className="navbar-brand">News Feed</a>
+          </div>
+          <ul className="nav navbar-nav">
+            <li><Link to="/">News</Link></li>
+            <li><Link to="/favorites">Favorites</Link></li>
+          </ul>
+        </div>
+      </nav>
     );
   }
 }
 
-module.exports = Nav;
+export default Nav;

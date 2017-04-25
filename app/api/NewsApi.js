@@ -1,16 +1,17 @@
 import Request from 'superagent';
 
 class Api {
-  getSources() {
+  getSource(succ, err) {
     const url = 'https://newsapi.org/v1/sources?language=en';
-    return Request.get(url).then((res) => {
-      const b = JSON.parse(res.text);
-      console.log('inside api');
-      return b.sources;
-    }, () => {
-      console.log('search failed');
-    });
+    return Request('GET', url).then(succ, err);
   }
+
+  getArticle(source, succ, err) {
+    const apikey = '213327409d384371851777e7c7f78dfe';
+    const url = `https://newsapi.org/v1/articles?source=${source}&apiKey=${apikey}`;
+    return Request('GET', url).then(succ, err);
+  }
+
   getNews(source, sort) {
     const apikey = '213327409d384371851777e7c7f78dfe';
     const url = `https://newsapi.org/v1/articles?source=${source}&sortBy=${sort}&apiKey=${apikey}`;
