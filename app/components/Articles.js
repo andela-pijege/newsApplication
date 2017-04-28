@@ -26,6 +26,7 @@ class Articles extends React.Component {
 
   handleClick(event) {
     newsAction.getNews(`${this.state.current.id}`, `${event.target.value}`);
+    console.log('fetching news', `${this.state.current.id}`, `${event.target.value}`);
     hashHistory.push('news');
   }
 
