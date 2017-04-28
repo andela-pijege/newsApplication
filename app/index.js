@@ -12,9 +12,9 @@ ReactDOM.render(
     <Route path="/" component={Main}>
       <Route path="favorites" component={Favorites} />
       <Route path="articles" component={Articles} />
-      <Route path="news" component={news} />
+      <Route path="/news/:id&:sort" component={news} />
       <IndexRoute component={Source} />
     </Route>
   </Router>,
 document.getElementById('app'));
-
+// "/articles/:id&:sort"

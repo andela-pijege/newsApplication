@@ -2,7 +2,7 @@ import React from 'react';
 import { hashHistory } from 'react-router';
 import newsAction from '../actions/NewsActions';
 import SourceStore from '../stores/SourceStore';
-import Articles from '../components/Articles';
+// import Articles from '../components/Articles';
 
 
 class Sources extends React.Component {
@@ -23,27 +23,47 @@ class Sources extends React.Component {
     this.setState({ newslist: sources.sources });
   }
   handleClick(news) {
-    newsAction.getArticles(`${news.id}`);
-    newsAction.getCurrent(news);
-    hashHistory.push(`articles`);
+    const id = news.id;
+    const sort = news.sortBysAvailable;
+    hashHistory.push(`news/${id}&${sort}`);
   }
 
   render() {
     return (
-      <div className="row">
-        {/*<h1>Sources Page!!!</h1>*/}
-        {this.state.newslist.map((news) => {
-          return (
-            <div className="col-sm-6 col-md-6">
-              <div className="thumbnail" key={news.id} onClick={() => { this.handleClick(news); }} >
-                <div className="caption">
-                  <h3>{news.name}</h3>
-                  <h4>{news.category}</h4>
-                  <p>{news.description}</p>
+      <div className="container">
+        <div className="nav-wrapper">
+        <form>
+          <div className="input-field">
+            <input type="search" id="search" name="search" placeholder="search for over 60 news sources" />
+            <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+            <i className="material-icons">close</i>
+          </div>
+        </form>
+        </div>
+        <div className="row">
+          {this.state.newslist.map((news) => {
+            return (
+              <div>
+                <div key={news.id}>
+                  <div>
+                    <div className="col s12 m4">
+                      <div className="card small blue-grey darken-1">
+                        <div className="card-content white-text">
+                          <span className="card-title">{news.name}</span>
+                            <h5>{news.category}</h5>
+                            <p>{news.description}</p>
+                        </div>
+                        <div className="card-action">
+                          <a onClick={() => { this.handleClick(news); }} className="waves-effect waves-light btn">VIEW</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-          </div>);
-        })}
+            </div>
+            );
+          })}
+        </div>
       </div>
     );
   }
