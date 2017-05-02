@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
 import assign from 'object-assign';
-import NewsDispatcher from '../dispatcher/NewsDispatcher';
-import NewsActionTypes from '../constants/NewsActionTypes';
+import NewsDispatcher from '../dispatcher/newsDispatcher';
+import NewsActionTypes from '../constants/newsActionTypes';
 import BaseStore from './baseStore';
 
 const CHANGE_EVENT = 'change';

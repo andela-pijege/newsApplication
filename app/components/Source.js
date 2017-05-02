@@ -1,8 +1,7 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
-import newsAction from '../actions/NewsActions';
-import SourceStore from '../stores/SourceStore';
-// import Articles from '../components/Articles';
+import { browserHistory } from 'react-router';
+import newsAction from '../actions/newsActions';
+import SourceStore from '../stores/sourceStore';
 
 
 class Sources extends React.Component {
@@ -11,6 +10,7 @@ class Sources extends React.Component {
     const sources = SourceStore.getSource();
     this.state = {
       newslist: sources,
+      search: '',
     };
     this.onChangeSource = this.onChangeSource.bind(this);
   }
@@ -25,26 +25,32 @@ class Sources extends React.Component {
   handleClick(news) {
     const id = news.id;
     const sort = news.sortBysAvailable;
-    hashHistory.push(`news/${id}&${sort}`);
+    browserHistory.push(`news/${id}&${sort}`);
+  }
+  searchSource(event) {
+    this.setState({ search: event.target.value });
   }
 
   render() {
+    console.log(this.state.newslist);
+    const sourcesFilter = this.state.newslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     return (
       <div className="container">
         <div className="nav-wrapper">
+          <h4 className="header center teal-text text-lighten-2">Welcome to News24/7</h4>
         <form>
           <div className="input-field">
-            <input type="search" id="search" name="search" placeholder="search for over 60 news sources" />
+            <input type="search" id="search" name="search" onChange={this.searchSource.bind(this)} placeholder="search for over 60 news sources" />
             <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
             <i className="material-icons">close</i>
           </div>
         </form>
         </div>
         <div className="row">
-          {this.state.newslist.map((news) => {
+          {sourcesFilter.map((news) => {
             return (
-              <div>
-                <div key={news.id}>
+              <div key={news.id}>
+                <div>
                   <div>
                     <div className="col s12 m4">
                       <div className="card small blue-grey darken-1">

@@ -1,5 +1,5 @@
 import React from 'react';
-import newsAction from '../actions/NewsActions';
+import newsAction from '../actions/newsActions';
 import newsStore from '../stores/newsStore';
 
 
@@ -38,8 +38,8 @@ class News extends React.Component {
           </select>
         </div>
         <div className="row">
-          {this.state.newslist.map(news =>
-            <div className="col s12 m4">
+          {this.state.newslist.map(news => 
+            <div className="col s12 m4" key={news.title}>
               <div className="card medium">
                 <div className="card-image">
                   <img src={news.urlToImage} />
@@ -61,18 +61,3 @@ class News extends React.Component {
 }
 
 module.exports = News;
-
-{ /* <div>
-          {this.state.newslist.map(news =>
-            <div>
-              <div>
-                <a href={news.url} rel="noopener noreferrer" target="_blank">
-                  <img src={news.urlToImage} alt="..." />
-                  <div>
-                  <h3>{news.title}</h3>
-                  <p>{news.description}</p>
-                </div>
-                </a>
-              </div>
-            </div>)}
-</div>*/ }

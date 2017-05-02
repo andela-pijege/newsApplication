@@ -1,7 +1,7 @@
 import Request from 'superagent';
-import api from '../api/NewsApi';
-import NewsActionTypes from '../constants/NewsActionTypes';
-import NewsDispatcher from '../dispatcher/NewsDispatcher';
+import api from '../api/newsApi';
+import NewsActionTypes from '../constants/newsActionTypes';
+import NewsDispatcher from '../dispatcher/newsDispatcher';
 
 const newsAction = {
   getSources() {
