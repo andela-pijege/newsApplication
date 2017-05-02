@@ -32,7 +32,6 @@ class Sources extends React.Component {
   }
 
   render() {
-    console.log(this.state.newslist);
     const sourcesFilter = this.state.newslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     return (
       <div className="container">
