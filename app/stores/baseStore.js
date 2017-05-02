@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import NewsDispatcher from '../dispatcher/NewsDispatcher';
+import NewsDispatcher from '../dispatcher/newsDispatcher';
 
 const CHANGE_EVENT = 'change';
 class BaseStore extends EventEmitter {

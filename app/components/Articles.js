@@ -1,6 +1,6 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
-import newsAction from '../actions/NewsActions';
+import newsAction from '../actions/newsActions';
 import articleStore from '../stores/articleStore';
 
 class Articles extends React.Component {
