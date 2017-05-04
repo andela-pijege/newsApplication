@@ -29,7 +29,7 @@ class News extends React.Component {
   render() {
     const sort = this.props.params.sort.split(',');
     return (
-      <div>
+      <div className="container">
         <h1>{this.props.params.id}</h1>
         <div className="input-field col s12">
           <select onChange={this.sortNews} style={{ display: 'block' }}>
@@ -39,13 +39,13 @@ class News extends React.Component {
         </div>
         <div className="row">
           {this.state.newslist.map(news => 
-            <div className="col s12 m4" key={news.title}>
-              <div className="card medium">
+            <div className="col s12 m6" key={news.title}>
+              <div className="card large">
                 <div className="card-image">
                   <img src={news.urlToImage} />
-                  <span className="card-title">{news.title}</span>
                 </div>
                 <div className="card-content">
+                  <span className="card-title">{news.title}</span>
                   <p>{news.description}</p>
                 </div>
                 <div className="card-action">
