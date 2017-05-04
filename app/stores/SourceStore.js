@@ -29,7 +29,7 @@ const SourceStore = assign({}, EventEmitter.prototype, {
 
 });
 
-
+// Register dispatcher callback
 NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
     case NewsActionTypes.GET_SOURCES:

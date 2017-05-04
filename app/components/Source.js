@@ -36,7 +36,7 @@ class Sources extends React.Component {
     return (
       <div className="container">
         <div className="nav-wrapper">
-          <h4 className="header center teal-text text-lighten-2">Welcome to News24/7</h4>
+          {/*<h4 className="header center teal-text text-lighten-2">Welcome to News24/7</h4>*/}
         <form>
           <div className="input-field">
             <input type="search" id="search" name="search" onChange={this.searchSource.bind(this)} placeholder="search for over 60 news sources" />
