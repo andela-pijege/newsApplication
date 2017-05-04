@@ -4,7 +4,7 @@ import { Route, Router, IndexRoute, browserHistory } from 'react-router';
 import Main from './components/main';
 import Source from './components/source';
 import news from './components/news';
-import firebaselogin from './components/fireBaselogin';
+// impgit ort firebaselogin from './components/fireBaselogin';
 
 ReactDOM.render(
   <Router history={browserHistory}>
