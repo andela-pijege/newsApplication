@@ -18,6 +18,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
-app.listen(4000, () => {
-  console.log(`Express server is up on port ${4000}`);
+app.listen(port, () => {
+  console.log(`Express server is up on port ${port}`);
 });
