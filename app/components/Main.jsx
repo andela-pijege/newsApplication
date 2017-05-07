@@ -7,7 +7,6 @@ class Main extends React.Component {
     return (
       <div>
         <Nav />
-        {/*<h1>Main Component!!!</h1>*/}
         {this.props.children}
         <Footer />
       </div>

@@ -6,7 +6,6 @@ const NewsActionTypes = keyMirror({
   GET_SOURCES: null,
   // get news
   GET_NEWS: null,
-  GET_ARTICLES: null,
 });
 
 export default NewsActionTypes;

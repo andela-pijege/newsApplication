@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import assign from 'object-assign';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 import NewsActionTypes from '../constants/NewsActionTypes';
-import BaseStore from './baseStore';
+import BaseStore from './BaseStore';
 
 const CHANGE_EVENT = 'change';
 const SourceStore = assign({}, EventEmitter.prototype, {
@@ -29,7 +29,7 @@ const SourceStore = assign({}, EventEmitter.prototype, {
 
 });
 
-
+// Register dispatcher callback
 NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
     case NewsActionTypes.GET_SOURCES:

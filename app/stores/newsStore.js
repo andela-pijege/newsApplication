@@ -11,6 +11,7 @@ const NewsStore = assign({}, EventEmitter.prototype, {
 
 // Accessor method
   getNews() {
+    // console.log('get news method from store', this.news);
     return this.news;
   },
 
@@ -32,11 +33,8 @@ NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
 
     case NewsActionTypes.GET_NEWS:
-      console.log('news store called');
-      console.log(payload);
       NewsStore.news = payload.newsItem;
       NewsStore.emitChange();
-      console.log('am at news stores');
       break;
     default:
       return true;
