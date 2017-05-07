@@ -9,7 +9,7 @@ class Sources extends React.Component {
     super(props);
     const sources = SourceStore.getSource();
     this.state = {
-      newslist: sources,
+      sourceslist: sources,
       search: '',
     };
     this.onChangeSource = this.onChangeSource.bind(this);
@@ -20,7 +20,7 @@ class Sources extends React.Component {
   }
   onChangeSource() {
     const sources = SourceStore.getSource();
-    this.setState({ newslist: sources.sources });
+    this.setState({ sourceslist: sources.sources });
   }
   handleClick(news) {
     const id = news.id;
@@ -32,7 +32,7 @@ class Sources extends React.Component {
   }
 
   render() {
-    const sourcesFilter = this.state.newslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+    const sourcesFilter = this.state.sourceslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     return (
       <div className="container">
         <div className="nav-wrapper">

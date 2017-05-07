@@ -14,7 +14,7 @@ class News extends React.Component {
     this.sortNews = this.sortNews.bind(this);
   }
   componentDidMount() {
-    newsAction.getNews(this.props.params.id, 'top');
+    newsAction.getNews(this.props.params.id, '');
     newsStore.addChangeListener(this.onChangeNews);
   }
   onChangeNews() {
@@ -33,7 +33,6 @@ class News extends React.Component {
         <h2>{this.props.params.id.toUpperCase()}</h2>
         <div className="input-field col s12">
           <select onChange={this.sortNews} style={{ display: 'block' }}>
-            <option value="" disabled selected>sort news by</option>
             {sort.map(sortValue => <option value={sortValue}>{sortValue}</option>)}
           </select>
         </div>

@@ -33,7 +33,7 @@ const SourceStore = assign({}, EventEmitter.prototype, {
 NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
     case NewsActionTypes.GET_SOURCES:
-      SourceStore.sources = payload.newsItem;
+      SourceStore.sources = payload.sourcesItem;
       SourceStore.emitChange();
       break;
     default:

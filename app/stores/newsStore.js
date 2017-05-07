@@ -11,7 +11,6 @@ const NewsStore = assign({}, EventEmitter.prototype, {
 
 // Accessor method
   getNews() {
-    // console.log('get news method from store', this.news);
     return this.news;
   },
 

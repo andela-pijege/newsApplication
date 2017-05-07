@@ -1,4 +1,4 @@
-import api from '../api/newsApi';
+import api from '../api/NewsApi';
 import NewsActionTypes from '../constants/NewsActionTypes';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 
@@ -8,7 +8,7 @@ const newsAction = {
       const newsSource = JSON.parse(res.text);
       NewsDispatcher.dispatch({
         eventName: NewsActionTypes.GET_SOURCES,
-        newsItem: newsSource,
+        sourcesItem: newsSource,
       });
     },
     (err) => {
