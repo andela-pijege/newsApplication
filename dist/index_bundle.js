@@ -4122,7 +4122,21 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 module.exports = SyntheticUIEvent;
 
 /***/ }),
-/* 34 */,
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _flux = __webpack_require__(144);
+
+exports.default = new _flux.Dispatcher();
+
+/***/ }),
 /* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5482,7 +5496,33 @@ module.exports = canDefineProperty;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 44 */,
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _keymirror = __webpack_require__(146);
+
+var _keymirror2 = _interopRequireDefault(_keymirror);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Define action constants
+var NewsActionTypes = (0, _keymirror2.default)({
+  // get news headlines based on sources
+  GET_SOURCES: null,
+  // get news
+  GET_NEWS: null
+});
+
+exports.default = NewsActionTypes;
+
+/***/ }),
 /* 45 */
 /***/ (function(module, exports) {
 
@@ -8696,7 +8736,58 @@ var _createMemoryHistory3 = _interopRequireDefault(_createMemoryHistory2);
 exports.createMemoryHistory = _createMemoryHistory3['default'];
 
 /***/ }),
-/* 72 */,
+/* 72 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _newsApi = __webpack_require__(119);
+
+var _newsApi2 = _interopRequireDefault(_newsApi);
+
+var _NewsActionTypes = __webpack_require__(44);
+
+var _NewsActionTypes2 = _interopRequireDefault(_NewsActionTypes);
+
+var _NewsDispatcher = __webpack_require__(34);
+
+var _NewsDispatcher2 = _interopRequireDefault(_NewsDispatcher);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var newsAction = {
+  getSources: function getSources() {
+    _newsApi2.default.getSource(function (res) {
+      var newsSource = JSON.parse(res.text);
+      _NewsDispatcher2.default.dispatch({
+        eventName: _NewsActionTypes2.default.GET_SOURCES,
+        newsItem: newsSource
+      });
+    }, function (err) {
+      throw err;
+    });
+  },
+  getNews: function getNews(source, sortby) {
+    _newsApi2.default.getNews(source, sortby, function (res) {
+      var news = JSON.parse(res.text);
+      _NewsDispatcher2.default.dispatch({
+        eventName: _NewsActionTypes2.default.GET_NEWS,
+        newsItem: news
+      });
+    }, function (err) {
+      throw err;
+    });
+  }
+};
+
+exports.default = newsAction;
+
+/***/ }),
 /* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12854,9 +12945,384 @@ function getIteratorFn(maybeIterable) {
 module.exports = getIteratorFn;
 
 /***/ }),
-/* 115 */,
-/* 116 */,
-/* 117 */,
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Nav = __webpack_require__(121);
+
+var _Nav2 = _interopRequireDefault(_Nav);
+
+var _Footer = __webpack_require__(120);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  function Main() {
+    _classCallCheck(this, Main);
+
+    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
+  }
+
+  _createClass(Main, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Nav2.default, null),
+        this.props.children,
+        _react2.default.createElement(_Footer2.default, null)
+      );
+    }
+  }]);
+
+  return Main;
+}(_react2.default.Component);
+
+module.exports = Main;
+
+/***/ }),
+/* 116 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _NewsActions = __webpack_require__(72);
+
+var _NewsActions2 = _interopRequireDefault(_NewsActions);
+
+var _NewsStore = __webpack_require__(124);
+
+var _NewsStore2 = _interopRequireDefault(_NewsStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var News = function (_React$Component) {
+  _inherits(News, _React$Component);
+
+  function News(props) {
+    _classCallCheck(this, News);
+
+    var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+
+    var news = _NewsStore2.default.getNews();
+    _this.state = {
+      newslist: news
+    };
+    _this.onChangeNews = _this.onChangeNews.bind(_this);
+    _this.sortNews = _this.sortNews.bind(_this);
+    return _this;
+  }
+
+  _createClass(News, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _NewsActions2.default.getNews(this.props.params.id, 'top');
+      _NewsStore2.default.addChangeListener(this.onChangeNews);
+    }
+  }, {
+    key: 'onChangeNews',
+    value: function onChangeNews() {
+      var news = _NewsStore2.default.getNews();
+      this.setState({ newslist: news.articles });
+    }
+  }, {
+    key: 'sortNews',
+    value: function sortNews(val) {
+      var sortValue = val.target.value;
+      _NewsActions2.default.getNews(this.props.params.id, sortValue);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var sort = this.props.params.sort.split(',');
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          this.props.params.id.toUpperCase()
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'input-field col s12' },
+          _react2.default.createElement(
+            'select',
+            { onChange: this.sortNews, style: { display: 'block' } },
+            _react2.default.createElement(
+              'option',
+              { value: '', disabled: true, selected: true },
+              'sort news by'
+            ),
+            sort.map(function (sortValue) {
+              return _react2.default.createElement(
+                'option',
+                { value: sortValue },
+                sortValue
+              );
+            })
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          this.state.newslist.map(function (news) {
+            return _react2.default.createElement(
+              'div',
+              { className: 'col s12 m6', key: news.title },
+              _react2.default.createElement(
+                'div',
+                { className: 'card large' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-image' },
+                  _react2.default.createElement('img', { src: news.urlToImage, alt: '' })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-content' },
+                  _react2.default.createElement(
+                    'span',
+                    { className: 'card-title' },
+                    news.title
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    news.description
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'card-action' },
+                  _react2.default.createElement(
+                    'a',
+                    { className: 'waves-effect waves-light btn', href: news.url, rel: 'noopener noreferrer', target: '_blank' },
+                    'Read More'
+                  )
+                )
+              )
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return News;
+}(_react2.default.Component);
+
+module.exports = News;
+
+/***/ }),
+/* 117 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(71);
+
+var _NewsActions = __webpack_require__(72);
+
+var _NewsActions2 = _interopRequireDefault(_NewsActions);
+
+var _SourceStore = __webpack_require__(125);
+
+var _SourceStore2 = _interopRequireDefault(_SourceStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Sources = function (_React$Component) {
+  _inherits(Sources, _React$Component);
+
+  function Sources(props) {
+    _classCallCheck(this, Sources);
+
+    var _this = _possibleConstructorReturn(this, (Sources.__proto__ || Object.getPrototypeOf(Sources)).call(this, props));
+
+    var sources = _SourceStore2.default.getSource();
+    _this.state = {
+      newslist: sources,
+      search: ''
+    };
+    _this.onChangeSource = _this.onChangeSource.bind(_this);
+    return _this;
+  }
+
+  _createClass(Sources, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _NewsActions2.default.getSources();
+      _SourceStore2.default.addChangeListener(this.onChangeSource);
+    }
+  }, {
+    key: 'onChangeSource',
+    value: function onChangeSource() {
+      var sources = _SourceStore2.default.getSource();
+      this.setState({ newslist: sources.sources });
+    }
+  }, {
+    key: 'handleClick',
+    value: function handleClick(news) {
+      var id = news.id;
+      var sort = news.sortBysAvailable;
+      _reactRouter.browserHistory.push('news/' + id + '&' + sort);
+    }
+  }, {
+    key: 'searchSource',
+    value: function searchSource(event) {
+      this.setState({ search: event.target.value });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var sourcesFilter = this.state.newslist.filter(function (source) {
+        return source.name.toLowerCase().indexOf(_this2.state.search.toLowerCase()) !== -1;
+      });
+      return _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'nav-wrapper' },
+          _react2.default.createElement(
+            'form',
+            null,
+            _react2.default.createElement(
+              'div',
+              { className: 'input-field' },
+              _react2.default.createElement('input', { type: 'search', id: 'search', name: 'search', onChange: this.searchSource.bind(this), placeholder: 'search for over 60 news sources' }),
+              _react2.default.createElement(
+                'label',
+                { className: 'label-icon', htmlFor: 'search' },
+                _react2.default.createElement(
+                  'i',
+                  { className: 'material-icons' },
+                  'search'
+                )
+              ),
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons' },
+                'close'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          sourcesFilter.map(function (news) {
+            return _react2.default.createElement(
+              'div',
+              { key: news.id },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'col s12 m4' },
+                    _react2.default.createElement(
+                      'div',
+                      { className: 'card small blue-grey darken-1' },
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'card-content white-text' },
+                        _react2.default.createElement(
+                          'span',
+                          { className: 'card-title' },
+                          news.name
+                        ),
+                        _react2.default.createElement(
+                          'h5',
+                          null,
+                          news.category
+                        ),
+                        _react2.default.createElement(
+                          'p',
+                          null,
+                          news.description
+                        )
+                      ),
+                      _react2.default.createElement(
+                        'div',
+                        { className: 'card-action' },
+                        _react2.default.createElement(
+                          'a',
+                          { onClick: function onClick() {
+                              _this2.handleClick(news);
+                            }, className: 'waves-effect waves-light btn' },
+                          'VIEW'
+                        )
+                      )
+                    )
+                  )
+                )
+              )
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return Sources;
+}(_react2.default.Component);
+
+module.exports = Sources;
+
+/***/ }),
 /* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12921,8 +13387,214 @@ var api = new Api();
 exports.default = api;
 
 /***/ }),
-/* 120 */,
-/* 121 */,
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Footer = function (_React$Component) {
+  _inherits(Footer, _React$Component);
+
+  function Footer() {
+    _classCallCheck(this, Footer);
+
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "footer",
+          { className: "page-footer  blue-grey darken-4" },
+          _react2.default.createElement(
+            "div",
+            { className: "container" },
+            _react2.default.createElement(
+              "div",
+              { className: "row" },
+              _react2.default.createElement(
+                "div",
+                { className: "col l6 s12" },
+                _react2.default.createElement(
+                  "h5",
+                  { className: "white-text" },
+                  "News 24/7"
+                ),
+                _react2.default.createElement(
+                  "p",
+                  { className: "grey-text text-lighten-4" },
+                  "Bringing you the best news worldwide"
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "col l4 offset-l2 s12" },
+                _react2.default.createElement(
+                  "h6",
+                  { className: "white-text" },
+                  "follow us"
+                ),
+                _react2.default.createElement(
+                  "ul",
+                  null,
+                  _react2.default.createElement(
+                    "li",
+                    null,
+                    _react2.default.createElement(
+                      "a",
+                      { className: "grey-text text-lighten-3", href: "https://www.facebook.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
+                      "facebook"
+                    )
+                  ),
+                  _react2.default.createElement(
+                    "li",
+                    null,
+                    _react2.default.createElement(
+                      "a",
+                      { className: "grey-text text-lighten-3", href: "https://www.twitter.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
+                      "twitter"
+                    )
+                  ),
+                  _react2.default.createElement(
+                    "li",
+                    null,
+                    _react2.default.createElement(
+                      "a",
+                      { className: "grey-text text-lighten-3", href: "https://www.instagram.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
+                      "instagram"
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "footer-copyright" },
+            _react2.default.createElement(
+              "div",
+              { className: "container" },
+              "\xA9 2017 Copyright News 24/7",
+              _react2.default.createElement(
+                "a",
+                { className: "grey-text text-lighten-4 right", href: "/" },
+                "Home"
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Footer;
+}(_react2.default.Component);
+
+module.exports = Footer;
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(6);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Nav = function (_Component) {
+  _inherits(Nav, _Component);
+
+  function Nav() {
+    _classCallCheck(this, Nav);
+
+    var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Nav, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        { className: "navbar-fixed" },
+        _react2.default.createElement(
+          "nav",
+          { className: "blue-grey darken-4" },
+          _react2.default.createElement(
+            "div",
+            { className: "nav-wrapper container" },
+            _react2.default.createElement(
+              "a",
+              { href: "/", className: "brand-logo" },
+              "News 24/7"
+            ),
+            _react2.default.createElement(
+              "ul",
+              { id: "nav-mobile", className: "right hide-on-med-and-down" },
+              _react2.default.createElement(
+                "li",
+                null,
+                _react2.default.createElement(
+                  "a",
+                  { href: "/" },
+                  "Home"
+                )
+              ),
+              _react2.default.createElement(
+                "li",
+                null,
+                "Logout"
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Nav;
+}(_react.Component);
+
+exports.default = Nav;
+
+/***/ }),
 /* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12939,17 +13611,17 @@ var _reactDom2 = _interopRequireDefault(_reactDom);
 
 var _reactRouter = __webpack_require__(71);
 
-var _main = __webpack_require__(266);
+var _Main = __webpack_require__(115);
 
-var _main2 = _interopRequireDefault(_main);
+var _Main2 = _interopRequireDefault(_Main);
 
-var _source = __webpack_require__(268);
+var _Source = __webpack_require__(117);
 
-var _source2 = _interopRequireDefault(_source);
+var _Source2 = _interopRequireDefault(_Source);
 
-var _news = __webpack_require__(267);
+var _News = __webpack_require__(116);
 
-var _news2 = _interopRequireDefault(_news);
+var _News2 = _interopRequireDefault(_News);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12960,16 +13632,231 @@ _reactDom2.default.render(_react2.default.createElement(
   { history: _reactRouter.browserHistory },
   _react2.default.createElement(
     _reactRouter.Route,
-    { path: '/', component: _main2.default },
-    _react2.default.createElement(_reactRouter.Route, { path: '/news/:id&:sort', component: _news2.default }),
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _source2.default })
+    { path: '/', component: _Main2.default },
+    _react2.default.createElement(_reactRouter.Route, { path: '/news/:id&:sort', component: _News2.default }),
+    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Source2.default })
   )
 ), document.getElementById('app'));
 
 /***/ }),
-/* 123 */,
-/* 124 */,
-/* 125 */,
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _events = __webpack_require__(45);
+
+var _NewsDispatcher = __webpack_require__(34);
+
+var _NewsDispatcher2 = _interopRequireDefault(_NewsDispatcher);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CHANGE_EVENT = 'change';
+
+var BaseStore = function (_EventEmitter) {
+  _inherits(BaseStore, _EventEmitter);
+
+  function BaseStore() {
+    _classCallCheck(this, BaseStore);
+
+    return _possibleConstructorReturn(this, (BaseStore.__proto__ || Object.getPrototypeOf(BaseStore)).apply(this, arguments));
+  }
+
+  _createClass(BaseStore, [{
+    key: 'emitChange',
+    value: function emitChange() {
+      this.emit(CHANGE_EVENT);
+    }
+  }, {
+    key: 'addChangeListener',
+    value: function addChangeListener(callback) {
+      this.on(CHANGE_EVENT, callback);
+    }
+  }, {
+    key: 'removeChangeListener',
+    value: function removeChangeListener(callback) {
+      this.removeListener(CHANGE_EVENT, callback);
+    }
+  }, {
+    key: 'subscribe',
+    value: function subscribe(actionSubscribe) {
+      this.dispatchToken = _NewsDispatcher2.default.register(actionSubscribe());
+    }
+  }]);
+
+  return BaseStore;
+}(_events.EventEmitter);
+
+exports.default = BaseStore;
+
+/***/ }),
+/* 124 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = __webpack_require__(45);
+
+var _objectAssign = __webpack_require__(4);
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+var _NewsDispatcher = __webpack_require__(34);
+
+var _NewsDispatcher2 = _interopRequireDefault(_NewsDispatcher);
+
+var _NewsActionTypes = __webpack_require__(44);
+
+var _NewsActionTypes2 = _interopRequireDefault(_NewsActionTypes);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CHANGE_EVENT = 'change';
+var NewsStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
+
+  news: [],
+
+  // Accessor method
+  getNews: function getNews() {
+    // console.log('get news method from store', this.news);
+    return this.news;
+  },
+  emitChange: function emitChange() {
+    this.emit(CHANGE_EVENT);
+  },
+  addChangeListener: function addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: function removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
+});
+
+_NewsDispatcher2.default.register(function (payload) {
+  switch (payload.eventName) {
+
+    case _NewsActionTypes2.default.GET_NEWS:
+      console.log('news store dispatcher', payload);
+      NewsStore.news = payload.newsItem;
+      NewsStore.emitChange();
+      break;
+    default:
+      return true;
+  }
+});
+
+exports.default = NewsStore;
+
+/***/ }),
+/* 125 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _events = __webpack_require__(45);
+
+var _objectAssign = __webpack_require__(4);
+
+var _objectAssign2 = _interopRequireDefault(_objectAssign);
+
+var _NewsDispatcher = __webpack_require__(34);
+
+var _NewsDispatcher2 = _interopRequireDefault(_NewsDispatcher);
+
+var _NewsActionTypes = __webpack_require__(44);
+
+var _NewsActionTypes2 = _interopRequireDefault(_NewsActionTypes);
+
+var _BaseStore = __webpack_require__(123);
+
+var _BaseStore2 = _interopRequireDefault(_BaseStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var CHANGE_EVENT = 'change';
+var SourceStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
+
+  sources: [],
+
+  // Accessor method
+  getSource: function getSource() {
+    return this.sources;
+  },
+  emitChange: function emitChange() {
+    this.emit(CHANGE_EVENT);
+  },
+  addChangeListener: function addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: function removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
+});
+
+// Register dispatcher callback
+_NewsDispatcher2.default.register(function (payload) {
+  switch (payload.eventName) {
+    case _NewsActionTypes2.default.GET_SOURCES:
+      SourceStore.sources = payload.newsItem;
+      SourceStore.emitChange();
+      break;
+    default:
+      return true;
+  }
+});
+
+// class SourceStore extends BaseStore {
+//   constructor() {
+//     super();
+//     this.subscribe(() => this.registerToActions.bind(this));
+//     this.sources = null;
+//   }
+
+//   registerToActions(payload) {
+//     switch (payload.eventName) {
+//       case NewsActionTypes.GET_SOURCES:
+//         console.log('store called');
+//         this.sources = payload.newItem;
+//         this.emitChange('source');
+//         console.log('stores');
+//         break;
+//       default:
+//         return true;
+//     }
+//   }
+
+//   getSource() {
+//     return this.sources;
+//   }
+// }
+
+exports.default = SourceStore;
+
+/***/ }),
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29822,908 +30709,6 @@ exports.cleanHeader = function(header, shouldStripCookie){
   }
   return header;
 };
-
-/***/ }),
-/* 263 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _flux = __webpack_require__(144);
-
-exports.default = new _flux.Dispatcher();
-
-/***/ }),
-/* 264 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _keymirror = __webpack_require__(146);
-
-var _keymirror2 = _interopRequireDefault(_keymirror);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Define action constants
-var NewsActionTypes = (0, _keymirror2.default)({
-  // get news headlines based on sources
-  GET_SOURCES: null,
-  // get news
-  GET_NEWS: null
-});
-
-exports.default = NewsActionTypes;
-
-/***/ }),
-/* 265 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _superagent = __webpack_require__(257);
-
-var _superagent2 = _interopRequireDefault(_superagent);
-
-var _newsApi = __webpack_require__(119);
-
-var _newsApi2 = _interopRequireDefault(_newsApi);
-
-var _newsActionTypes = __webpack_require__(264);
-
-var _newsActionTypes2 = _interopRequireDefault(_newsActionTypes);
-
-var _newsDispatcher = __webpack_require__(263);
-
-var _newsDispatcher2 = _interopRequireDefault(_newsDispatcher);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var newsAction = {
-  getSources: function getSources() {
-    _newsApi2.default.getSource(function (res) {
-      var newsSource = JSON.parse(res.text);
-      _newsDispatcher2.default.dispatch({
-        eventName: _newsActionTypes2.default.GET_SOURCES,
-        newsItem: newsSource
-      });
-    }, function (err) {
-      throw err;
-    });
-  },
-  getNews: function getNews(source, sortby) {
-    _newsApi2.default.getNews(source, sortby, function (res) {
-      var news = JSON.parse(res.text);
-      _newsDispatcher2.default.dispatch({
-        eventName: _newsActionTypes2.default.GET_NEWS,
-        newsItem: news
-      });
-    }, function (err) {
-      throw err;
-    });
-  }
-};
-
-exports.default = newsAction;
-
-/***/ }),
-/* 266 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _nav = __webpack_require__(270);
-
-var _nav2 = _interopRequireDefault(_nav);
-
-var _footer = __webpack_require__(269);
-
-var _footer2 = _interopRequireDefault(_footer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Main = function (_React$Component) {
-  _inherits(Main, _React$Component);
-
-  function Main() {
-    _classCallCheck(this, Main);
-
-    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
-  }
-
-  _createClass(Main, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_nav2.default, null),
-        this.props.children,
-        _react2.default.createElement(_footer2.default, null)
-      );
-    }
-  }]);
-
-  return Main;
-}(_react2.default.Component);
-
-module.exports = Main;
-
-/***/ }),
-/* 267 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _newsActions = __webpack_require__(265);
-
-var _newsActions2 = _interopRequireDefault(_newsActions);
-
-var _newsStore = __webpack_require__(272);
-
-var _newsStore2 = _interopRequireDefault(_newsStore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var News = function (_React$Component) {
-  _inherits(News, _React$Component);
-
-  function News(props) {
-    _classCallCheck(this, News);
-
-    var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
-
-    var news = _newsStore2.default.getNews();
-    _this.state = {
-      newslist: news
-    };
-    _this.onChangeNews = _this.onChangeNews.bind(_this);
-    _this.sortNews = _this.sortNews.bind(_this);
-    return _this;
-  }
-
-  _createClass(News, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      _newsActions2.default.getNews(this.props.params.id, 'top');
-      _newsStore2.default.addChangeListener(this.onChangeNews);
-    }
-  }, {
-    key: 'onChangeNews',
-    value: function onChangeNews() {
-      var news = _newsStore2.default.getNews();
-      this.setState({ newslist: news.articles });
-    }
-  }, {
-    key: 'sortNews',
-    value: function sortNews(val) {
-      var sortValue = val.target.value;
-      _newsActions2.default.getNews(this.props.params.id, sortValue);
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var sort = this.props.params.sort.split(',');
-      return _react2.default.createElement(
-        'div',
-        { className: 'container' },
-        _react2.default.createElement(
-          'h1',
-          null,
-          this.props.params.id
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'input-field col s12' },
-          _react2.default.createElement(
-            'select',
-            { onChange: this.sortNews, style: { display: 'block' } },
-            _react2.default.createElement(
-              'option',
-              { value: '', disabled: true, selected: true },
-              'sort news by'
-            ),
-            sort.map(function (sortValue) {
-              return _react2.default.createElement(
-                'option',
-                { value: sortValue },
-                sortValue
-              );
-            })
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          this.state.newslist.map(function (news) {
-            return _react2.default.createElement(
-              'div',
-              { className: 'col s12 m6', key: news.title },
-              _react2.default.createElement(
-                'div',
-                { className: 'card large' },
-                _react2.default.createElement(
-                  'div',
-                  { className: 'card-image' },
-                  _react2.default.createElement('img', { src: news.urlToImage })
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'card-content' },
-                  _react2.default.createElement(
-                    'span',
-                    { className: 'card-title' },
-                    news.title
-                  ),
-                  _react2.default.createElement(
-                    'p',
-                    null,
-                    news.description
-                  )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { className: 'card-action' },
-                  _react2.default.createElement(
-                    'a',
-                    { className: 'waves-effect waves-light btn', href: news.url, rel: 'noopener noreferrer', target: '_blank' },
-                    'Read More'
-                  )
-                )
-              )
-            );
-          })
-        )
-      );
-    }
-  }]);
-
-  return News;
-}(_react2.default.Component);
-
-module.exports = News;
-
-/***/ }),
-/* 268 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRouter = __webpack_require__(71);
-
-var _newsActions = __webpack_require__(265);
-
-var _newsActions2 = _interopRequireDefault(_newsActions);
-
-var _sourceStore = __webpack_require__(273);
-
-var _sourceStore2 = _interopRequireDefault(_sourceStore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Sources = function (_React$Component) {
-  _inherits(Sources, _React$Component);
-
-  function Sources(props) {
-    _classCallCheck(this, Sources);
-
-    var _this = _possibleConstructorReturn(this, (Sources.__proto__ || Object.getPrototypeOf(Sources)).call(this, props));
-
-    var sources = _sourceStore2.default.getSource();
-    _this.state = {
-      newslist: sources,
-      search: ''
-    };
-    _this.onChangeSource = _this.onChangeSource.bind(_this);
-    return _this;
-  }
-
-  _createClass(Sources, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      _newsActions2.default.getSources();
-      _sourceStore2.default.addChangeListener(this.onChangeSource);
-    }
-  }, {
-    key: 'onChangeSource',
-    value: function onChangeSource() {
-      var sources = _sourceStore2.default.getSource();
-      this.setState({ newslist: sources.sources });
-    }
-  }, {
-    key: 'handleClick',
-    value: function handleClick(news) {
-      var id = news.id;
-      var sort = news.sortBysAvailable;
-      _reactRouter.browserHistory.push('news/' + id + '&' + sort);
-    }
-  }, {
-    key: 'searchSource',
-    value: function searchSource(event) {
-      this.setState({ search: event.target.value });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      var sourcesFilter = this.state.newslist.filter(function (source) {
-        return source.name.toLowerCase().indexOf(_this2.state.search.toLowerCase()) !== -1;
-      });
-      return _react2.default.createElement(
-        'div',
-        { className: 'container' },
-        _react2.default.createElement(
-          'div',
-          { className: 'nav-wrapper' },
-          _react2.default.createElement(
-            'form',
-            null,
-            _react2.default.createElement(
-              'div',
-              { className: 'input-field' },
-              _react2.default.createElement('input', { type: 'search', id: 'search', name: 'search', onChange: this.searchSource.bind(this), placeholder: 'search for over 60 news sources' }),
-              _react2.default.createElement(
-                'label',
-                { className: 'label-icon', htmlFor: 'search' },
-                _react2.default.createElement(
-                  'i',
-                  { className: 'material-icons' },
-                  'search'
-                )
-              ),
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons' },
-                'close'
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'row' },
-          sourcesFilter.map(function (news) {
-            return _react2.default.createElement(
-              'div',
-              { key: news.id },
-              _react2.default.createElement(
-                'div',
-                null,
-                _react2.default.createElement(
-                  'div',
-                  null,
-                  _react2.default.createElement(
-                    'div',
-                    { className: 'col s12 m4' },
-                    _react2.default.createElement(
-                      'div',
-                      { className: 'card small blue-grey darken-1' },
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'card-content white-text' },
-                        _react2.default.createElement(
-                          'span',
-                          { className: 'card-title' },
-                          news.name
-                        ),
-                        _react2.default.createElement(
-                          'h5',
-                          null,
-                          news.category
-                        ),
-                        _react2.default.createElement(
-                          'p',
-                          null,
-                          news.description
-                        )
-                      ),
-                      _react2.default.createElement(
-                        'div',
-                        { className: 'card-action' },
-                        _react2.default.createElement(
-                          'a',
-                          { onClick: function onClick() {
-                              _this2.handleClick(news);
-                            }, className: 'waves-effect waves-light btn' },
-                          'VIEW'
-                        )
-                      )
-                    )
-                  )
-                )
-              )
-            );
-          })
-        )
-      );
-    }
-  }]);
-
-  return Sources;
-}(_react2.default.Component);
-
-module.exports = Sources;
-
-/***/ }),
-/* 269 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Footer = function (_React$Component) {
-  _inherits(Footer, _React$Component);
-
-  function Footer() {
-    _classCallCheck(this, Footer);
-
-    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
-  }
-
-  _createClass(Footer, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        null,
-        _react2.default.createElement(
-          "footer",
-          { className: "page-footer black" },
-          _react2.default.createElement(
-            "div",
-            { className: "container" },
-            _react2.default.createElement(
-              "div",
-              { className: "row" },
-              _react2.default.createElement(
-                "div",
-                { className: "col l6 s12" },
-                _react2.default.createElement(
-                  "h5",
-                  { className: "white-text" },
-                  "Nwes 24/7"
-                ),
-                _react2.default.createElement(
-                  "p",
-                  { className: "grey-text text-lighten-4" },
-                  "bringing you the best news worldwide"
-                )
-              ),
-              _react2.default.createElement(
-                "div",
-                { className: "col l4 offset-l2 s12" },
-                _react2.default.createElement(
-                  "h6",
-                  { className: "white-text" },
-                  "follw us"
-                ),
-                _react2.default.createElement(
-                  "ul",
-                  null,
-                  _react2.default.createElement(
-                    "li",
-                    null,
-                    _react2.default.createElement(
-                      "a",
-                      { className: "grey-text text-lighten-3", href: "https://www.facebook.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
-                      "facebook"
-                    )
-                  ),
-                  _react2.default.createElement(
-                    "li",
-                    null,
-                    _react2.default.createElement(
-                      "a",
-                      { className: "grey-text text-lighten-3", href: "https://www.twitter.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
-                      "twitter"
-                    )
-                  ),
-                  _react2.default.createElement(
-                    "li",
-                    null,
-                    _react2.default.createElement(
-                      "a",
-                      { className: "grey-text text-lighten-3", href: "https://www.instagram.com/news24/7", rel: "noopener noreferrer", target: "_blank" },
-                      "instagram"
-                    )
-                  )
-                )
-              )
-            )
-          ),
-          _react2.default.createElement(
-            "div",
-            { className: "footer-copyright" },
-            _react2.default.createElement(
-              "div",
-              { className: "container" },
-              "\xA9 2017 Copyright News 24/7",
-              _react2.default.createElement(
-                "a",
-                { className: "grey-text text-lighten-4 right", href: "#!" },
-                "News"
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Footer;
-}(_react2.default.Component);
-
-module.exports = Footer;
-
-/***/ }),
-/* 270 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(6);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Nav = function (_Component) {
-  _inherits(Nav, _Component);
-
-  function Nav() {
-    _classCallCheck(this, Nav);
-
-    var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this));
-
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(Nav, [{
-    key: "render",
-    value: function render() {
-      return _react2.default.createElement(
-        "div",
-        { className: "navbar-fixed" },
-        _react2.default.createElement(
-          "nav",
-          { className: "black" },
-          _react2.default.createElement(
-            "div",
-            { className: "nav-wrapper container" },
-            _react2.default.createElement(
-              "a",
-              { className: "brand-logo" },
-              "News 24/7"
-            ),
-            _react2.default.createElement(
-              "ul",
-              { id: "nav-mobile", className: "right hide-on-med-and-down" },
-              _react2.default.createElement(
-                "li",
-                null,
-                _react2.default.createElement(
-                  "a",
-                  { href: "/" },
-                  "News"
-                )
-              ),
-              _react2.default.createElement(
-                "li",
-                null,
-                "logout"
-              )
-            )
-          )
-        )
-      );
-    }
-  }]);
-
-  return Nav;
-}(_react.Component);
-
-exports.default = Nav;
-
-/***/ }),
-/* 271 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _events = __webpack_require__(45);
-
-var _newsDispatcher = __webpack_require__(263);
-
-var _newsDispatcher2 = _interopRequireDefault(_newsDispatcher);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CHANGE_EVENT = 'change';
-
-var BaseStore = function (_EventEmitter) {
-  _inherits(BaseStore, _EventEmitter);
-
-  function BaseStore() {
-    _classCallCheck(this, BaseStore);
-
-    return _possibleConstructorReturn(this, (BaseStore.__proto__ || Object.getPrototypeOf(BaseStore)).apply(this, arguments));
-  }
-
-  _createClass(BaseStore, [{
-    key: 'emitChange',
-    value: function emitChange() {
-      this.emit(CHANGE_EVENT);
-    }
-  }, {
-    key: 'addChangeListener',
-    value: function addChangeListener(callback) {
-      this.on(CHANGE_EVENT, callback);
-    }
-  }, {
-    key: 'removeChangeListener',
-    value: function removeChangeListener(callback) {
-      this.removeListener(CHANGE_EVENT, callback);
-    }
-  }, {
-    key: 'subscribe',
-    value: function subscribe(actionSubscribe) {
-      this.dispatchToken = _newsDispatcher2.default.register(actionSubscribe());
-    }
-  }]);
-
-  return BaseStore;
-}(_events.EventEmitter);
-
-exports.default = BaseStore;
-
-/***/ }),
-/* 272 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _events = __webpack_require__(45);
-
-var _objectAssign = __webpack_require__(4);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _newsDispatcher = __webpack_require__(263);
-
-var _newsDispatcher2 = _interopRequireDefault(_newsDispatcher);
-
-var _newsActionTypes = __webpack_require__(264);
-
-var _newsActionTypes2 = _interopRequireDefault(_newsActionTypes);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CHANGE_EVENT = 'change';
-var NewsStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
-
-  news: [],
-
-  // Accessor method
-  getNews: function getNews() {
-    // console.log('get news method from store', this.news);
-    return this.news;
-  },
-  emitChange: function emitChange() {
-    this.emit(CHANGE_EVENT);
-  },
-  addChangeListener: function addChangeListener(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-  removeChangeListener: function removeChangeListener(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
-});
-
-_newsDispatcher2.default.register(function (payload) {
-  switch (payload.eventName) {
-
-    case _newsActionTypes2.default.GET_NEWS:
-      console.log('news store dispatcher', payload);
-      NewsStore.news = payload.newsItem;
-      NewsStore.emitChange();
-      break;
-    default:
-      return true;
-  }
-});
-
-exports.default = NewsStore;
-
-/***/ }),
-/* 273 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _events = __webpack_require__(45);
-
-var _objectAssign = __webpack_require__(4);
-
-var _objectAssign2 = _interopRequireDefault(_objectAssign);
-
-var _newsDispatcher = __webpack_require__(263);
-
-var _newsDispatcher2 = _interopRequireDefault(_newsDispatcher);
-
-var _newsActionTypes = __webpack_require__(264);
-
-var _newsActionTypes2 = _interopRequireDefault(_newsActionTypes);
-
-var _baseStore = __webpack_require__(271);
-
-var _baseStore2 = _interopRequireDefault(_baseStore);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var CHANGE_EVENT = 'change';
-var SourceStore = (0, _objectAssign2.default)({}, _events.EventEmitter.prototype, {
-
-  sources: [],
-
-  // Accessor method
-  getSource: function getSource() {
-    return this.sources;
-  },
-  emitChange: function emitChange() {
-    this.emit(CHANGE_EVENT);
-  },
-  addChangeListener: function addChangeListener(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-  removeChangeListener: function removeChangeListener(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  }
-});
-
-// Register dispatcher callback
-_newsDispatcher2.default.register(function (payload) {
-  switch (payload.eventName) {
-    case _newsActionTypes2.default.GET_SOURCES:
-      SourceStore.sources = payload.newsItem;
-      SourceStore.emitChange();
-      break;
-    default:
-      return true;
-  }
-});
-
-// class SourceStore extends BaseStore {
-//   constructor() {
-//     super();
-//     this.subscribe(() => this.registerToActions.bind(this));
-//     this.sources = null;
-//   }
-
-//   registerToActions(payload) {
-//     switch (payload.eventName) {
-//       case NewsActionTypes.GET_SOURCES:
-//         console.log('store called');
-//         this.sources = payload.newItem;
-//         this.emitChange('source');
-//         console.log('stores');
-//         break;
-//       default:
-//         return true;
-//     }
-//   }
-
-//   getSource() {
-//     return this.sources;
-//   }
-// }
-
-exports.default = SourceStore;
 
 /***/ })
 /******/ ]);

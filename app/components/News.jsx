@@ -1,6 +1,6 @@
 import React from 'react';
-import newsAction from '../actions/newsActions';
-import newsStore from '../stores/newsStore';
+import newsAction from '../actions/NewsActions';
+import newsStore from '../stores/NewsStore';
 
 
 class News extends React.Component {
@@ -13,7 +13,7 @@ class News extends React.Component {
     this.onChangeNews = this.onChangeNews.bind(this);
     this.sortNews = this.sortNews.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     newsAction.getNews(this.props.params.id, 'top');
     newsStore.addChangeListener(this.onChangeNews);
   }
@@ -30,7 +30,7 @@ class News extends React.Component {
     const sort = this.props.params.sort.split(',');
     return (
       <div className="container">
-        <h1>{this.props.params.id}</h1>
+        <h2>{this.props.params.id.toUpperCase()}</h2>
         <div className="input-field col s12">
           <select onChange={this.sortNews} style={{ display: 'block' }}>
             <option value="" disabled selected>sort news by</option>
@@ -42,7 +42,7 @@ class News extends React.Component {
             <div className="col s12 m6" key={news.title}>
               <div className="card large">
                 <div className="card-image">
-                  <img src={news.urlToImage} />
+                  <img src={news.urlToImage} alt="" />
                 </div>
                 <div className="card-content">
                   <span className="card-title">{news.title}</span>

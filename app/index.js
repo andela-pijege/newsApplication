@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Router, IndexRoute, browserHistory } from 'react-router';
-import Main from './components/main';
-import Source from './components/source';
-import news from './components/news';
+import Main from './components/Main';
+import Source from './components/Source';
+import news from './components/News';
 // import firebaselogin from './components/fireBaselogin';
 
 ReactDOM.render(
