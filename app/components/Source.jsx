@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
-import newsAction from '../actions/newsActions';
-import SourceStore from '../stores/sourceStore';
+import newsAction from '../actions/NewsActions';
+import SourceStore from '../stores/SourceStore';
 
 
 class Sources extends React.Component {
@@ -14,7 +14,7 @@ class Sources extends React.Component {
     };
     this.onChangeSource = this.onChangeSource.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     newsAction.getSources();
     SourceStore.addChangeListener(this.onChangeSource);
   }

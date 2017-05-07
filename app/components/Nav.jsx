@@ -9,12 +9,12 @@ class Nav extends Component {
   render() {
     return (
       <div className="navbar-fixed">
-        <nav className="black">
+        <nav className="blue-grey darken-4">
           <div className="nav-wrapper container">
-            <a className="brand-logo">News 24/7</a>
+            <a href="/" className="brand-logo">News 24/7</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li><a href="/">News</a></li>
-              <li>logout</li>
+              <li><a href="/">Home</a></li>
+              <li>Logout</li>
             </ul>
           </div>
         </nav>
