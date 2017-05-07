@@ -13755,7 +13755,6 @@ _NewsDispatcher2.default.register(function (payload) {
   switch (payload.eventName) {
 
     case _NewsActionTypes2.default.GET_NEWS:
-      console.log('news store dispatcher', payload);
       NewsStore.news = payload.newsItem;
       NewsStore.emitChange();
       break;

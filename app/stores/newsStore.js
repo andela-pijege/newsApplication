@@ -33,7 +33,6 @@ NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
 
     case NewsActionTypes.GET_NEWS:
-      console.log('news store dispatcher', payload);
       NewsStore.news = payload.newsItem;
       NewsStore.emitChange();
       break;
