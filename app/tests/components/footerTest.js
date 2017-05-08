@@ -1,24 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import expect from 'expect';
+import chaiEnzyme from 'chai-enzyme';
+import chai, { expect } from 'chai';
 import Footer from '../../components/Footer';
 
+chai.use(chaiEnzyme());
+const wrapper = shallow(<Footer />);
 describe('Test Footer component', () => {
-  const wrapper = shallow(<Footer />);
-  // it('should exist', () => {
-  //   expect(wrapper).to.exist();
-  //   expect(wrapper).to.be.present();
-  // });
-  describe('should have an html element called ', () => {
-    it('div', () => {
-      expect(wrapper.type()).toBe('div');
-    });
-    it('footer', () => {
-      expect(wrapper.node.props.children.type).toBe('footer');
-    });
-
-    it('div', () => {
-      expect(wrapper.node.props.children.props.className).toBe('page-footer  blue-grey darken-4');
-    });
+  it('component should exist', () => {
+    expect(wrapper).to.be.present();
+  });
+  it('component should have class name', () => {
+    expect(wrapper.find('footer')).to.have.className('page-footer');
+    expect(wrapper.find('footer')).to.not.have.className('root');
   });
 });
