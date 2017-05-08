@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
+import firebase from '../firebaseConfig';
 
 class Nav extends Component {
   constructor() {
     super();
     this.state = {};
   }
+
+  signOut() {
+    firebase.auth().signOut().then(() => {
+      localStorage.removeItem('uid');
+      window.location = '/login';
+    }, (error) => {
+      console.error('Sign Out Error', error);
+    });
+  }
+
 
   render() {
     return (
@@ -14,7 +25,7 @@ class Nav extends Component {
             <a href="/" className="brand-logo">News 24/7</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="/">Home</a></li>
-              <li>Logout</li>
+              <li><a onClick={() => { this.signOut(); }}>Logout</a></li>
             </ul>
           </div>
         </nav>
