@@ -27,12 +27,12 @@ export default class Login extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid login-page">
-        <h1 className="brand">News 24/7</h1>
-        <div className="content">
-          <h2 className="text-center headline">Get Live Headlines From 60
-            Popular News Sources Around the World</h2>
-          <div id="firebaseui-container"></div>
+      <div className="container center">
+        <h3>Welcome to News 24/7</h3>
+        <div>
+          <h4>Get Live Headlines From 60
+            Popular News Sources Around the World</h4>
+          <div id="firebaseui-container">sign in</div>
         </div>
       </div>
     );
