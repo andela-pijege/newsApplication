@@ -37,7 +37,7 @@ class News extends React.Component {
           </select>
         </div>
         <div className="row">
-          {this.state.newslist.map(news => 
+          {this.state.newslist.map(news =>
             <div className="col s12 m6" key={news.title}>
               <div className="card large">
                 <div className="card-image">

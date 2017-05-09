@@ -33,7 +33,8 @@ class Sources extends React.Component {
   }
 
   render() {
-    const sourcesFilter = this.state.sourceslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+    const sourcesFilter = this.state.sourceslist.filter(source =>
+    source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     return (
       <div className="container">
         <div className="nav-wrapper">
