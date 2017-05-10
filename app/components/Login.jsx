@@ -32,7 +32,7 @@ export default class Login extends React.Component {
         <div>
           <h4>Get Live Headlines From 60
             Popular News Sources Around the World</h4>
-          <div id="firebaseui-container">sign in</div>
+          <div id="firebaseui-container">Sign in</div>
         </div>
       </div>
     );

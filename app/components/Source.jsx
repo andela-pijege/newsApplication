@@ -1,9 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import newsAction from '../actions/NewsActions';
 import SourceStore from '../stores/SourceStore';
 
+/**
+ * @return {*} return the Sources component
+*/
 
 class Sources extends React.Component {
   constructor(props) {
@@ -33,7 +36,8 @@ class Sources extends React.Component {
   }
 
   render() {
-    const sourcesFilter = this.state.sourceslist.filter(source => source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+    const sourcesFilter = this.state.sourceslist.filter(source =>
+    source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
     return (
       <div className="container">
         <div className="nav-wrapper">
@@ -73,5 +77,9 @@ class Sources extends React.Component {
     );
   }
 }
+
+Sources.propTypes = {
+  handleClick: propTypes.func.isRequired,
+};
 
 module.exports = Sources;

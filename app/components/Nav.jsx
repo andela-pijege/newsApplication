@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import firebase from '../firebaseConfig';
 
+/**
+ * @return {*} returns the Nav component
+*/
+
 class Nav extends Component {
   constructor() {
     super();
@@ -12,7 +16,7 @@ class Nav extends Component {
       localStorage.removeItem('uid');
       window.location = '/login';
     }, (error) => {
-      console.error('Sign Out Error', error);
+      window.error('Sign Out Error', error);
     });
   }
 

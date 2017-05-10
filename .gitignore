@@ -3,3 +3,4 @@ dist/index_bundle.js
 .nyc_output
 coverage
 .DS_Store
+.env
