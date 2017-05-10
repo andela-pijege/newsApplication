@@ -78,8 +78,5 @@ class Sources extends React.Component {
   }
 }
 
-Sources.propTypes = {
-  handleClick: propTypes.func.isRequired,
-};
 
 module.exports = Sources;
