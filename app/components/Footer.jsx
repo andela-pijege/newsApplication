@@ -1,5 +1,9 @@
 import React from 'react';
 
+/**
+ * @return {*} returns the footer component
+*/
+
 class Footer extends React.Component {
   render() {
     return (

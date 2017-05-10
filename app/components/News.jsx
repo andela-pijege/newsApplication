@@ -2,6 +2,9 @@ import React from 'react';
 import newsAction from '../actions/NewsActions';
 import newsStore from '../stores/NewsStore';
 
+/**
+ * @return {*} return the News component
+*/
 
 class News extends React.Component {
   constructor(props) {
@@ -31,7 +34,7 @@ class News extends React.Component {
     return (
       <div className="container">
         <h2>{this.props.params.id.toUpperCase()}</h2>
-        <div className="input-field col s12">
+        <div className="input-field col s12">Sort By:
           <select onChange={this.sortNews} style={{ display: 'block' }}>
             {sort.map(sortValue => <option value={sortValue}>{sortValue}</option>)}
           </select>

@@ -11,8 +11,8 @@ const newsAction = {
         sourcesItem: newsSource,
       });
     },
-    (err) => {
-      throw err;
+    (error) => {
+      throw window.alert(error);
     });
   },
   getNews(source, sortby) {
@@ -23,8 +23,8 @@ const newsAction = {
         newsItem: news,
       });
     },
-    (err) => {
-      throw err;
+    (error) => {
+      throw window.alert(error);
     });
   },
 };

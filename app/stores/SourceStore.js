@@ -2,14 +2,29 @@ import { EventEmitter } from 'events';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 import NewsActionTypes from '../constants/NewsActionTypes';
 
+/**
+ * @class Stores
+ * @extends {EventEmitter}
+ */
+
 const CHANGE_EVENT = 'change';
 class Stores extends EventEmitter {
+
+  /**
+   * Creates an instance of Stores
+   * @memberof Store
+   */
+
   constructor() {
     super();
     this.sources = [];
   }
 
-// Accessor method
+  /**
+   * @returns {array} returns list of news Sources
+   * @memberof Store
+   */
+
   getSource() {
     return this.sources;
   }
