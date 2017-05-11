@@ -1,5 +1,5 @@
-const path = require('path');
 require('dotenv').config();
+const path = require('path');
 const webpack = require('webpack');
 
 const envsDefinePlugin = new webpack.DefinePlugin({
@@ -7,7 +7,7 @@ const envsDefinePlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  entry: './app/index.jsx',
+  entry: path.resolve(__dirname + '/app/index.jsx'),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
