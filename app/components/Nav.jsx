@@ -29,7 +29,7 @@ class Nav extends Component {
             <a href="/" className="brand-logo">News 24/7</a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li><a href="/">Home</a></li>
-              <li><a onClick={() => { this.signOut(); }}>Logout</a></li>
+              <li><a onClick={this.signOut}>Logout</a></li>
             </ul>
           </div>
         </nav>

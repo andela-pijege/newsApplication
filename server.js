@@ -1,8 +1,10 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
 
 const app = express();
 const port = process.env.PORT || 4000;
+dotenv.config();
 
 app.use((req, res, next) => {
   if (req.headers['x-forwarded-proto'] === 'https') {
