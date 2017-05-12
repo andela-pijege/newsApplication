@@ -5,10 +5,18 @@ import newsAction from '../actions/NewsActions';
 import SourceStore from '../stores/SourceStore';
 
 /**
- * @return {*} return the Sources component
-*/
+ * @desc represents Source component
+ *
+ * @class Source
+ * @extends {React.Component}
+ */
 
 class Sources extends React.Component {
+  /**
+   * Creates an instance of Source
+   *
+   * @memberof Source
+   */
   constructor(props) {
     super(props);
     const sources = SourceStore.getSource();
@@ -18,22 +26,55 @@ class Sources extends React.Component {
     };
     this.onChangeSource = this.onChangeSource.bind(this);
   }
+  /**
+   *
+   * @desc represents a life cycle state of this component.
+   * It updates the state of this component when it is rendered.
+   *
+   * @memberof Source
+   */
   componentDidMount() {
     newsAction.getSources();
     SourceStore.addChangeListener(this.onChangeSource);
   }
+  /**
+ * @function
+ * @returns {object} array
+ * @description update source state by listening for
+ * change in the state of the source store.
+ * */
   onChangeSource() {
     const sources = SourceStore.getSource();
     this.setState({ sourceslist: sources.sources });
   }
+  /**
+   *
+   * @desc passes parameters via route
+   * @param {object} news news sources id and sorttype are passed as a string.
+   *
+   * @memberof Source
+   */
   handleClick(news) {
     const id = news.id;
     const sort = news.sortBysAvailable;
     browserHistory.push(`news/${id}&${sort}`);
   }
+  /**
+   *
+   * @desc gets search value
+   * @param {event} event the event gets the value of the event
+   *
+   * @memberof Source
+   */
   searchSource(event) {
     this.setState({ search: event.target.value });
   }
+  /**
+   *
+   * @desc renders elements to the DOM
+   *
+   * @memberof Source
+   */
 
   render() {
     const sourcesFilter = this.state.sourceslist.filter(source =>

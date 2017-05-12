@@ -1,9 +1,11 @@
 import React from 'react';
 
-/**
- * @return {*} returns the footer component
-*/
 
+/**
+ * @desc represents the Footer component.
+ *
+ * @returns a rendered div elements in the DOM
+ */
 class Footer extends React.Component {
   render() {
     return (

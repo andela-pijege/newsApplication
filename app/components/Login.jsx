@@ -1,8 +1,22 @@
 import React from 'react';
 import firebase from '../firebaseConfig';
 
+/**
+ * @desc represents Login component
+ *
+ * @class Login
+ * @extends {React.Component}
+ */
+
 export default class Login extends React.Component {
 
+  /**
+   *
+   * @desc represents a life cycle state of this component.
+   * It updates the state of this component when it is rendered.
+   *
+   * @memberof Login
+   */
   componentDidMount() {
      // FirebaseUI
     const uiConfig = {
@@ -24,7 +38,12 @@ export default class Login extends React.Component {
     const ui = new firebaseui.auth.AuthUI(firebase.auth());
     ui.start('#firebaseui-container', uiConfig);
   }
-
+   /**
+   *
+   * @desc renders elements to the DOM
+   *
+   * @memberof Login
+   */
   render() {
     return (
       <div className="container center">
