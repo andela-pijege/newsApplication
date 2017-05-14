@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import newsAction from '../actions/NewsActions';
 import newsStore from '../stores/NewsStore';
 
@@ -100,6 +100,12 @@ class News extends React.Component {
 News.defaultProps = {
   params: { sort: 'top' },
   newslist: [],
+  id: '',
+  sort: 'top',
+};
+News.propTypes = {
+  id: PropTypes.string,
+  sort: PropTypes.string,
 };
 
 module.exports = News;
