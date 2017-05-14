@@ -8,12 +8,6 @@ class Api {
     return Request('GET', url).then(success, error);
   }
 
-  getArticle(source, success, error) {
-    const apikey = process.env.API_KEY;
-    const url = `https://newsapi.org/v1/articles?source=${source}&apiKey=${apikey}`;
-    return Request('GET', url).then(success, error);
-  }
-
   getNews(source, sort, success, error) {
     const apikey = process.env.API_KEY;
     const url = `https://newsapi.org/v1/articles?source=${source}&sortBy=${sort}&apiKey=${apikey}`;

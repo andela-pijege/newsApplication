@@ -3,6 +3,8 @@ import NewsDispatcher from '../dispatcher/NewsDispatcher';
 import NewsActionTypes from '../constants/NewsActionTypes';
 
 /**
+ *
+ * Represents Flux Store for news component.
  * @class Stores
  * @extends {EventEmitter}
  */
@@ -22,20 +24,38 @@ class Stores extends EventEmitter {
 
   /**
    * @returns {array} returns list of news Sources
-   * @memberof Store
+   * @memberof Stores
    */
   getNews() {
     return this.news;
   }
-
+  /**
+   *
+   * @description notify the news component of change in state.
+   * @return {void}
+   * @memberof Stores
+   */
   emitChange() {
     this.emit(CHANGE_EVENT);
   }
-
+  /**
+   *
+   * @desc adds a listener that communicates state change to the news component.
+   * @param {function} callback
+   * @returns {void}
+   * @memberof Stores
+   */
   addChangeListener(callback) {
     this.on(CHANGE_EVENT, callback);
   }
-
+   /**
+   *
+   * @desc removes the listener added by addChangeListener,
+   * terminates commincation with the news component.
+   * @param {function} callback
+   * @returns {void}
+   * @memberof Stores
+   */
   removeChangeListener(callback) {
     this.removeListener(CHANGE_EVENT, callback);
   }

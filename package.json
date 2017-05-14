@@ -7,7 +7,7 @@
     "coverage": "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
     "start": "webpack -p && node server.js",
     "test": "mocha app/tests/.setup.js app/tests/**/*.js",
-    "test:nyc": "./node_modules/.bin/nyc --reporter=html --reporter=text mocha app/tests/.setup.js app/tests/**/*.js"
+    "test:nyc": "./node_modules/.bin/nyc --reporter=html --reporter=text --extension .jsx --extension .js mocha app/tests/.setup.js app/tests/**/*.js"
   },
   "babel": {
     "presets": [

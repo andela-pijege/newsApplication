@@ -2,15 +2,27 @@ import React, { Component } from 'react';
 import firebase from '../firebaseConfig';
 
 /**
- * @return {*} returns the Nav component
-*/
+ * @desc represents Nav component
+ *
+ * @class Nav
+ * @extends {Component}
+ */
 
 class Nav extends Component {
+  /**
+   * Creates an instance of Nav
+   *
+   * @memberof Nav
+   */
+
   constructor() {
     super();
     this.state = {};
   }
-
+/**
+ * @desc signs a user out of the application
+ *
+ */
   signOut() {
     firebase.auth().signOut().then(() => {
       localStorage.removeItem('uid');
@@ -20,7 +32,11 @@ class Nav extends Component {
     });
   }
 
-
+  /**
+   *
+   * @desc renders elements to the DOM
+   *
+   */
   render() {
     return (
       <div className="navbar-fixed">

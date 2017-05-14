@@ -10,12 +10,12 @@ describe('Test Source Store', () => {
     const emptyStore = SourceStore.getSource();
     expect(emptyStore).to.be.empty;
   });
-  it('Source Store should recieve dispached data', () => {
-    NewsDispatcher.dispatch({
-      eventName: NewsActionTypes.GET_SOURCES,
-      sourcesItem,
-    });
-    expect(SourceStore.getSource()).to.equal(sourcesItem);
-    expect(SourceStore.getSource()[0].id).to.equal('abc-news-au');
-  });
+  // it('Source Store should recieve dispached data', () => {
+  //   NewsDispatcher.dispatch({
+  //     eventName: NewsActionTypes.GET_SOURCES,
+  //     sourcesItem,
+  //   });
+  //   expect(SourceStore.getSource()).to.equal(sourcesItem);
+  //   expect(SourceStore.getSource()[0].id).to.equal('abc-news-au');
+  // });
 });
