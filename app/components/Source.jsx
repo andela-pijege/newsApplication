@@ -50,7 +50,7 @@ class Sources extends React.Component {
   /**
    *
    * @desc passes parameters via route
-   * @param {object} news news sources id and sorttype are passed as a string.
+   * @param {object} news newsid and sorttype are passed as a string.
    *
    * @memberof Source
    */

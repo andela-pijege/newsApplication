@@ -5,7 +5,7 @@ import NewsDispatcher from '../dispatcher/NewsDispatcher';
 const newsAction = {
   /**
    * @desc initiates call to api to get sources
-   * then sends it through the dispatcher 
+   * then sends it through the dispatcher
    * to the store
    *
    * @memberof newsAction
@@ -24,7 +24,7 @@ const newsAction = {
   },
    /**
    * @desc initiates call to api to get news
-   * then sends it through the dispatcher 
+   * then sends it through the dispatcher
    * to the store
    *@param {string} source and sortby are both pased as string
 

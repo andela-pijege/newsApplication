@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import newsAction from '../actions/NewsActions';
 import newsStore from '../stores/NewsStore';
 
@@ -68,7 +69,7 @@ class News extends React.Component {
     const sort = this.props.params.sort.split(',');
     return (
       <div className="container">
-        <h2>{this.props.params.id.toUpperCase()}</h2>
+        <h2>{this.props.params.id}</h2>
         <div className="input-field col s12">Sort By:
           <select onChange={this.sortNews} style={{ display: 'block' }}>
             {sort.map(sortValue => <option value={sortValue}>{sortValue}</option>)}
@@ -96,5 +97,9 @@ class News extends React.Component {
     );
   }
 }
+News.defaultProps = {
+  params: { sort: 'top' },
+  newslist: [],
+};
 
 module.exports = News;
