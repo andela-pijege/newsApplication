@@ -1,7 +1,5 @@
 import Request from 'superagent';
 
-// require('dotenv').config();
-
 class Api {
   getSource(success, error) {
     const url = 'https://newsapi.org/v1/sources?language=en';

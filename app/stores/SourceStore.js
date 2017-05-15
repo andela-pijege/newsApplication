@@ -72,6 +72,9 @@ NewsDispatcher.register((payload) => {
       SourceStore.sources = payload.sourcesItem;
       SourceStore.emitChange();
       break;
+    case NewsActionTypes.GET_SOURCES_FAILED:
+
+      break;
     default:
       return true;
   }

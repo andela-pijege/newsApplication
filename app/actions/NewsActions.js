@@ -3,6 +3,21 @@ import NewsActionTypes from '../constants/NewsActionTypes';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 
 const newsAction = {
+  gotSources(res) {
+    const newsSource = res.body;
+    NewsDispatcher.dispatch({
+      eventName: NewsActionTypes.GET_SOURCES,
+      sourcesItem: newsSource,
+    });
+  },
+
+  getSourcesFailed(error) {
+    NewsDispatcher.dispatch({
+      eventName: NewsActionTypes.GET_SOURCES_FAILED,
+      message: 'Failed to load sources. Please try again.',
+      cause: error.message,
+    });
+  },
   /**
    * @desc initiates call to api to get sources
    * then sends it through the dispatcher
@@ -11,17 +26,9 @@ const newsAction = {
    * @memberof newsAction
    */
   getSources() {
-    api.getSource((res) => {
-      const newsSource = res.body;
-      NewsDispatcher.dispatch({
-        eventName: NewsActionTypes.GET_SOURCES,
-        sourcesItem: newsSource,
-      });
-    },
-    (error) => {
-      throw window.alert(error);
-    });
+    api.getSource(this.gotSources, this.getSourcesFailed);
   },
+
    /**
    * @desc initiates call to api to get news
    * then sends it through the dispatcher
@@ -30,17 +37,22 @@ const newsAction = {
 
    * @memberof newsAction
    */
-  getNews(source, sortby) {
-    api.getNews(source, sortby, (res) => {
-      const news = JSON.parse(res.text);
-      NewsDispatcher.dispatch({
-        eventName: NewsActionTypes.GET_NEWS,
-        newsItem: news,
-      });
-    },
-    (error) => {
-      throw window.alert(error);
+  gotNews(res) {
+    const news = res.body;
+    NewsDispatcher.dispatch({
+      eventName: NewsActionTypes.GET_NEWS,
+      newsItem: news,
     });
+  },
+  getNewsFailed(error) {
+    NewsDispatcher.dispatch({
+      eventName: NewsActionTypes.GET_NEWS_FAILED,
+      message: 'Failed to load News Please try again.',
+      cause: error.message,
+    });
+  },
+  getNews(source, sortby) {
+    api.getNews(source, sortby, this.gotNews, this.getNewsFailed);
   },
 };
 

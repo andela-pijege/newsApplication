@@ -8,8 +8,10 @@ import keyMirror from 'keymirror';
 const NewsActionTypes = keyMirror({
   // get news headlines based on sources
   GET_SOURCES: null,
+  GET_SOURCES_FAILED: null,
   // get news
   GET_NEWS: null,
+  GET_NEWS_FAILED: null,
 });
 
 export default NewsActionTypes;
