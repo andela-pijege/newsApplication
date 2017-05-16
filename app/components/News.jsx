@@ -5,16 +5,15 @@ import newsStore from '../stores/NewsStore';
 
 /**
  * @desc represents News component
- *
  * @class News
  * @extends {React.Component}
  */
-
 class News extends React.Component {
   /**
-   * Creates an instance of News
-   *
+   * @desc Creates an instance of News
    * @memberof News
+   * @returns {void}
+   * @param {object} props object inherited from superclass
    */
   constructor(props) {
     super(props);
@@ -29,8 +28,8 @@ class News extends React.Component {
    *
    * @desc represents a life cycle state of this component.
    * It updates the state of this component when it is rendered.
-   *
    * @memberof Source
+   * @returns {void}
    */
   componentDidMount() {
     newsAction.getNews(this.props.params.id, '');
@@ -38,9 +37,10 @@ class News extends React.Component {
   }
  /**
  * @function
- * @returns {object} array
+ * @returns {void}
  * @description update News state by listening for
  * change in the state of the News store.
+ * @memberof News
  * */
   onChangeNews() {
     const news = newsStore.getNews();
@@ -49,8 +49,9 @@ class News extends React.Component {
     /**
    *
    * @desc passes parameters via route
-   * @param {object} val sorttype is gotten from val as a parameter to sort news
-   *
+   * @param {object} val represents sort type options and passed as
+   * a param to sort news
+   * @returns {void}
    * @memberof News
    */
   sortNews(val) {
@@ -61,11 +62,13 @@ class News extends React.Component {
    /**
    *
    * @desc renders elements to the DOM
-   *
+   * @returns {object} rendered html elements in the DOM
    * @memberof News
    */
-
   render() {
+    if (!this.state.newslist) {
+      return (<h4 className="container">ooPs!!! an error occured, Please reload your browser</h4>);
+    }
     const sort = this.props.params.sort.split(',');
     return (
       <div className="container">
@@ -87,10 +90,11 @@ class News extends React.Component {
                   <p>{news.description}</p>
                 </div>
                 <div className="card-action">
-                  <a className="waves-effect waves-light btn" href={news.url} rel="noopener noreferrer" target="_blank">Read More</a>
+                  <a className="waves-effect waves-light btn" href={news.url}
+                  rel="noopener noreferrer" target="_blank">Read More</a>
                 </div>
               </div>
-            </div>,
+            </div>
           )}
         </div>
       </div>

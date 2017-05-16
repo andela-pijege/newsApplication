@@ -2,35 +2,37 @@ import { EventEmitter } from 'events';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 import NewsActionTypes from '../constants/NewsActionTypes';
 
+
+const CHANGE_EVENT = 'change';
+
 /**
- *
- * Represents Flux Store for news component.
+ * @desc Represents Store for news component.
  * @class Stores
  * @extends {EventEmitter}
  */
-
-const CHANGE_EVENT = 'change';
 class Stores extends EventEmitter {
 
   /**
-   * Creates an instance of Stores
+   * @desc Creates an instance of Stores
    * @memberof Stores
    */
-
   constructor() {
     super();
     this.news = [];
+    this.errorMessaage = '';
   }
 
   /**
-   * @returns {array} returns list of news Sources
+   * @returns {object} returns list of news Sources
    * @memberof Stores
    */
   getNews() {
+    if (!this.news) {
+      return this.errorMessaage;
+    }
     return this.news;
   }
   /**
-   *
    * @description notify the news component of change in state.
    * @return {void}
    * @memberof Stores
@@ -68,6 +70,10 @@ NewsDispatcher.register((payload) => {
   switch (payload.eventName) {
     case NewsActionTypes.GET_NEWS:
       NewsStore.news = payload.newsItem;
+      NewsStore.emitChange();
+      break;
+    case NewsActionTypes.GET_SOURCES_FAILED:
+      NewsStore.errorMessaage = payload.message;
       NewsStore.emitChange();
       break;
     default:

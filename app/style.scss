@@ -3,23 +3,23 @@ $b-radius: 10px;
 
 
 .login-wrapper{
-    background-color: $bg-color;
-    border-radius: $b-radius;
-    padding: 5px 10px 5px 10px;
-    margin-top: 100px;
-    margin-bottom: 130px;
-    width: 650px;
-    height: 200px;
+  background-color: $bg-color;
+  border-radius: $b-radius;
+  padding: 5px 10px 5px 10px;
+  margin-top: 100px;
+  margin-bottom: 130px;
+  width: 650px;
+  height: 200px;
 
-    h3{
-        color: slategrey;
-        font-size: 2.5rem;
-    }
+  h3{
+    color: slategrey;
+    font-size: 2.5rem;
+  }
 
-    h6{
-        color: slategrey;
-        font-size: 0.7em;
-        margin-top:-7px;
-    }
+  h6{
+    color: slategrey;
+    font-size: 0.7em;
+    margin-top:-7px;
+  }
 
 }

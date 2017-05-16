@@ -1,46 +1,62 @@
 module.exports = {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
-  "env": {
-    "es6": true,
-    "mocha": true,
-    "node": true,
-    "browser": true
-  },
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
-  "rules": {
-    "import/no-extraneous-dependencies": ["error", {
-      "devDependencies": true,
-      "optionalDependencies": false,
-      "peerDependencies": false
-    }],
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
-  },
-  "settings": {
-    "import/parser": "babel-eslint",
-    "import/resolver":{
-      "webpack": {
-        "config": {
-          "resolve" : {
-            "modules": ["node_modules", "src"],
-            "extensions": [".js", ".json", ".jsx", ".css"]
-          }
-        }
+    "extends": "airbnb-base",
+    "env": {"node": true,
+      "es6": true,
+      "jest": true,
+    },
+    "plugins": [
+      "react",
+      "jsx-a11y",
+      "import"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true,
+        "arrowFunctions": true,
+        "modules": true
       }
+    },
+    "globals": {
+      "window": true,
+      "localStorage": true,
+    },
+    "rules": {
+      "one-var": 0,
+      "react/jsx-uses-vars": 1,
+      "semi": [2, "always"],
+      "no-constant-condition": 1,
+      "one-var-declaration-per-line": 2,
+      "new-cap": 0,
+      "consistent-return": 0,
+      "no-param-reassign": 0,
+      "comma-dangle": 0,
+      "space-before-function-paren": 0,
+      "no-case-declarations": 0,
+      "no-use-before-define": 0,
+      "no-unused-vars": 0,
+      "class-methods-use-this": 0,
+      "curly": ["error", "multi-line" 
+      ],
+      "import/no-unresolved": [0, {"commonjs": true
+        } 
+      ],
+      "import/newline-after-import": 0,
+      "no-shadow": ["error", { "allow": ["req", "res", "err"] } ],
+      "valid-jsdoc": ["error", {
+          "requireReturn": true,
+          "requireReturnType": true,
+          "requireParamDescription": false,
+          "requireReturnDescription": true
+        } 
+      ],
+      "require-jsdoc": ["error", {
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ClassDeclaration": true
+        }
+      }],
     }
-  },
-  "globals": {
-    "__DEVELOPMENT__": true,
-    "__CLIENT__": true,
-    "__SERVER__": true,
-    "__DISABLE_SSR__": true,
-    "__DEVTOOLS__": true,
-    "webpackIsomorphicTools": true,
-    "sinon": true
-  }
-
-};
+}
