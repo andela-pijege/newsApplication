@@ -2,32 +2,35 @@ import { EventEmitter } from 'events';
 import NewsDispatcher from '../dispatcher/NewsDispatcher';
 import NewsActionTypes from '../constants/NewsActionTypes';
 
+
+const CHANGE_EVENT = 'change';
+
 /**
  * @desc Represents Flux Store for Source component.
  *
  * @class Stores
  * @extends {EventEmitter}
  */
-
-const CHANGE_EVENT = 'change';
 class Stores extends EventEmitter {
 
   /**
    * Creates an instance of Stores
    * @memberof Store
    */
-
   constructor() {
     super();
     this.sources = [];
+    this.errorMessaage = '';
   }
 
   /**
-   * @returns {array} returns list of news Sources
+   * @returns {object} returns list of news Sources
    * @memberof Store
    */
-
   getSource() {
+    if (!this.sources) {
+      return this.errorMessaage;
+    }
     return this.sources;
   }
   /**
@@ -73,7 +76,8 @@ NewsDispatcher.register((payload) => {
       SourceStore.emitChange();
       break;
     case NewsActionTypes.GET_SOURCES_FAILED:
-
+      SourceStore.errorMessaage = payload.message;
+      SourceStore.emitChange();
       break;
     default:
       return true;

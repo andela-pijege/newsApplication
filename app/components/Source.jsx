@@ -1,5 +1,4 @@
 import React from 'react';
-import propTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 import newsAction from '../actions/NewsActions';
 import SourceStore from '../stores/SourceStore';
@@ -10,12 +9,12 @@ import SourceStore from '../stores/SourceStore';
  * @class Source
  * @extends {React.Component}
  */
-
 class Sources extends React.Component {
   /**
-   * Creates an instance of Source
-   *
+   * @desc Creates an instance of Source
+   * @return {void}
    * @memberof Source
+   * @param {object} props inherited object from super class
    */
   constructor(props) {
     super(props);
@@ -30,7 +29,7 @@ class Sources extends React.Component {
    *
    * @desc represents a life cycle state of this component.
    * It updates the state of this component when it is rendered.
-   *
+   * @return {void}
    * @memberof Source
    */
   componentDidMount() {
@@ -39,7 +38,7 @@ class Sources extends React.Component {
   }
   /**
  * @function
- * @returns {object} array
+ * @returns {void}
  * @description update source state by listening for
  * change in the state of the source store.
  * */
@@ -50,42 +49,49 @@ class Sources extends React.Component {
   /**
    *
    * @desc passes parameters via route
-   * @param {object} news newsid and sorttype are passed as a string.
-   *
+   * @param {object} news represents an object where we can extract newsid and
+   * sort category
+   * @returns {void}
    * @memberof Source
    */
-  handleClick(news) {
+  static handleClick(news) {
     const id = news.id;
     const sort = news.sortBysAvailable;
     browserHistory.push(`news/${id}&${sort}`);
   }
+
   /**
    *
    * @desc gets search value
    * @param {event} event the event gets the value of the event
-   *
+   * @return {void}
    * @memberof Source
    */
   searchSource(event) {
     this.setState({ search: event.target.value });
   }
   /**
-   *
    * @desc renders elements to the DOM
-   *
    * @memberof Source
+   * @return {object} returns rendered html elements
    */
-
   render() {
+    if (!this.state.sourceslist) {
+      return (<h4 className="container">ooPs!!! an error occured, Please reload your browser</h4>);
+    }
     const sourcesFilter = this.state.sourceslist.filter(source =>
-    source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1);
+      source.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1
+    );
     return (
       <div className="container">
         <div className="nav-wrapper">
           <form>
             <div className="input-field">
-              <input type="search" id="search" name="search" onChange={this.searchSource.bind(this)} placeholder="search for over 60 news sources" />
-              <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+              <input type="search" id="search" name="search" onChange={this.searchSource.bind(this)}
+              placeholder="search for over 60 news sources" />
+              <label className="label-icon" htmlFor="search"><i className="material-icons">search
+                </i>
+              </label>
               <i className="material-icons">close</i>
             </div>
           </form>
@@ -104,7 +110,8 @@ class Sources extends React.Component {
                           <p>{news.description}</p>
                         </div>
                         <div className="card-action">
-                          <a onClick={() => { this.handleClick(news); }} className="waves-effect waves-light btn">VIEW</a>
+                          <a onClick={() => { Sources.handleClick(news); }}
+                            className="waves-effect waves-light btn">VIEW</a>
                         </div>
                       </div>
                     </div>
@@ -118,6 +125,5 @@ class Sources extends React.Component {
     );
   }
 }
-
 
 module.exports = Sources;

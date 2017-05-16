@@ -7,7 +7,7 @@ const envsDefinePlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
-  entry: path.resolve(__dirname + '/app/index.jsx'),
+  entry: path.resolve(`${__dirname}/app/index.jsx`),
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',

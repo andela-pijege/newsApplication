@@ -7,7 +7,6 @@ import firebase from '../firebaseConfig';
  * @class Login
  * @extends {React.Component}
  */
-
 export default class Login extends React.Component {
 
   /**
@@ -15,9 +14,11 @@ export default class Login extends React.Component {
    * @desc represents a life cycle state of this component.
    * It updates the state of this component when it is rendered.
    *
+   * @returns {void}
+   *
    * @memberof Login
    */
-  componentDidMount() {
+  componentDidMount() {//eslint-disable-line
      // FirebaseUI
     const uiConfig = {
       signInFlow: 'popup',
@@ -41,7 +42,7 @@ export default class Login extends React.Component {
    /**
    *
    * @desc renders elements to the DOM
-   *
+   * @returns {object}  rendered html elements in the DOM
    * @memberof Login
    */
   render() {

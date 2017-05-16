@@ -2,9 +2,9 @@ import React from 'react';
 
 
 /**
- * @desc represents the Footer component.
  *
- * @returns a rendered div elements in the DOM
+ * @desc represents the Footer component.
+ * @returns {object} a rendered html elements in the DOM
  */
 const Footer = () => {
   return (

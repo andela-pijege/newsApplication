@@ -3,25 +3,22 @@ import firebase from '../firebaseConfig';
 
 /**
  * @desc represents Nav component
- *
  * @class Nav
  * @extends {Component}
  */
-
 class Nav extends Component {
   /**
-   * Creates an instance of Nav
-   *
+   * @desc Creates an instance of Nav
    * @memberof Nav
    */
-
   constructor() {
     super();
     this.state = {};
   }
 /**
  * @desc signs a user out of the application
- *
+ * @memberof Nav
+ * @returns {void}
  */
   signOut() {
     firebase.auth().signOut().then(() => {
@@ -33,9 +30,9 @@ class Nav extends Component {
   }
 
   /**
-   *
    * @desc renders elements to the DOM
-   *
+   * @memberof Nav
+   * @returns {object} rendered html elements in the DOM
    */
   render() {
     return (
