@@ -110,7 +110,7 @@ class Sources extends React.Component {
                           <p>{news.description}</p>
                         </div>
                         <div className="card-action">
-                          <a onClick={() => { Sources.handleClick(news); }}
+                          <a onClick={() => { this.handleClick(news); }}
                             className="waves-effect waves-light btn">VIEW</a>
                         </div>
                       </div>
