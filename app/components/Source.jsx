@@ -54,7 +54,7 @@ class Sources extends React.Component {
    * @returns {void}
    * @memberof Source
    */
-  static handleClick(news) {
+  handleClick(news) {
     const id = news.id;
     const sort = news.sortBysAvailable;
     browserHistory.push(`news/${id}&${sort}`);
